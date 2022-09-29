@@ -23,6 +23,7 @@ let touchStartTime, touchEndTime, touchStarted;
 
 let resized = false;
 let touch0_x, touch0_y, touch1_x, touch1_y;
+let originalSize;
 
 let targetDivs = document.querySelectorAll(".target");
 targetDivs.forEach(target => {
@@ -153,15 +154,19 @@ bgDiv.addEventListener("touchmove", e => {
     } 
     else if(resized && selectedDiv!= null){
         console.log("start resizing");
-        var divWidth = parseInt(selectedDiv.style.width,10);
-        var newLength = Math.abs(e.touches[0].clientX  - e.touches[1].clientX) - Math.abs(touch0_x - touch1_x);  
-        var newDivWidth = divWidth + newLength;
+        //var divWidth = parseInt(selectedDiv.style.width,10);
+        //var newLength = Math.abs(e.touches[0].clientX  - e.touches[1].clientX) - Math.abs(touch0_x - touch1_x);  
+        var newDivWidth = Math.abs(e.touches[0].clientX  - e.touches[1].clientX);
+        if (newDivWidth >= 10 ){
+            selectedDiv.style.width = newDivWidth.toString() + "px";
+            draggedDiv.style.left= `${draggedDiv.style.left - newDivWidth/2 }px`;
+        }
         console.log(selectedDiv.style.width);
-        console.log(newLength);
-        console.log(newDivWidth);
+        //console.log(newLength);
+        //console.log(newDivWidth);
 
-        selectedDiv.style.width = newDivWidth.toString() + "px";
-        console.log(selectedDiv.style.width);
+        //selectedDiv.style.width = newDivWidth.toString() + "px";
+        //console.log(selectedDiv.style.width);
     }
 });
 
@@ -178,6 +183,7 @@ bgDiv.addEventListener("touchstart", e => {
         if(!touchStarted){
             console.log("resizing");
             resized = true;
+            originalSize = parseInt(selectedDiv.style.width,10);
         }
         else{
             console.log("cancel dragging");
