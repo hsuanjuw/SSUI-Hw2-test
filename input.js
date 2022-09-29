@@ -19,9 +19,7 @@ let lastTouchedTime = 0;
 let lastTouchedEndTime = 0;
 
 
-let touchStartTime;
-let touchEndTime;
-let touchStarted;
+let touchStartTime, touchEndTime, touchStarted;
 
 let resized = false;
 let touch0_x, touch0_y, touch1_x, touch1_y;
@@ -97,14 +95,15 @@ targetDivs.forEach(target => {
             console.log("db touch on");
             dbclicked = true;
             changeColor(e);
+            draggedDiv = e.target;
         } 
         else{
-            if (mouseMoved) {
+            draggedDiv = null;
+            if (mouseMoved) { // dragging 
                 mouseMoved = false;
             }
             else if (dbclicked && touchTime < 500) { // db touch end 
-                dbclicked = false;
-                draggedDiv = null;           
+                dbclicked = false;          
             } 
             else if (!dbclicked){ // one touch = click
                 changeColor(e); 
