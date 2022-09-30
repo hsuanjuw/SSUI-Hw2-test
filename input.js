@@ -175,8 +175,10 @@ bgDiv.addEventListener("touchmove", e => {
 
 bgDiv.addEventListener("touchstart", e => {
     touchStartTime2 = new Date().getTime();
-
-    if (e.touches.length === 2) {
+    if (e.touches.length === 1){
+        touchStarted = true;
+    }
+    else if (e.touches.length === 2) {
         touch0_x = e.touches[0].clientX;
         touch0_y = e.touches[0].clientY;
         touch1_x = e.touches[1].clientX;
@@ -184,7 +186,7 @@ bgDiv.addEventListener("touchstart", e => {
         console.log(touchStartTime2);
         console.log(lastTouchStartTime);
 
-        if( touchStartTime2 - lastTouchStartTime < 1500){
+        if( touchStartTime2 - lastTouchStartTime < 1500 || !touchStarted){
             console.log("resizing");
             resized = true;
             originalSize = parseInt(selectedDiv.style.width,10);
