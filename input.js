@@ -154,13 +154,14 @@ bgDiv.addEventListener("touchmove", e => {
         //var divWidth = parseInt(selectedDiv.style.width,10);
         //var newLength = Math.abs(e.touches[0].clientX  - e.touches[1].clientX) - Math.abs(touch0_x - touch1_x);  
         var newDivWidth = Math.abs(e.touches[0].clientX  - e.touches[1].clientX);
+        console.log(newDivWidth);
         if (newDivWidth >= 10 ){
-            if(e.touches[0].clientX < e.touches[1].clientX){
-                draggedDiv.style.left= `${e.touches[0].clientX }px`;
-            }
-            else{
-                draggedDiv.style.left= `${e.touches[1].clientX }px`;
-            }
+            // if(e.touches[0].clientX < e.touches[1].clientX){
+            //     draggedDiv.style.left= `${e.touches[0].clientX }px`;
+            // }
+            // else{
+            //     draggedDiv.style.left= `${e.touches[1].clientX }px`;
+            // }
             
             selectedDiv.style.width = newDivWidth.toString() + "px";
         }
