@@ -181,9 +181,9 @@ bgDiv.addEventListener("touchstart", e => {
         touch0_y = e.touches[0].clientY;
         touch1_x = e.touches[1].clientX;
         touch1_y = e.touches[1].clientY;
-        console.log("touchStartTime2");
-        console.log("lastTouchedEndTime");
-        
+        console.log(touchStartTime2);
+        console.log(lastTouchedEndTime);
+
         if( touchStartTime2 - lastTouchedEndTime < 500){
             console.log("resizing");
             resized = true;
