@@ -195,7 +195,7 @@ bgDiv.addEventListener("touchstart", e => {
             draggedDiv.style.left= `${mouse_x - draggedOffset_x}px`;
             draggedDiv = null;             
         }
-    }
+    
     lastTouchedEndTime = touchStartTime2;
     // if (e.touches.length === 1){
     //     touchStarted = true;
