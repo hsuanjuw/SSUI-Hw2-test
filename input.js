@@ -18,7 +18,7 @@ let dbclicked = false;
 let lastTouchedEndTime = 0;
 
 let touchStartTime, touchEndTime, touchStarted;
-let touchStartTime2, lasttouchStartTime = 0;
+let touchStartTime2, lastTouchStartTime = 0;
 
 let resized = false;
 let touch0_x, touch0_y, touch1_x, touch1_y;
@@ -182,9 +182,9 @@ bgDiv.addEventListener("touchstart", e => {
         touch1_x = e.touches[1].clientX;
         touch1_y = e.touches[1].clientY;
         console.log(touchStartTime2);
-        console.log(lastTouchedEndTime);
+        console.log(lastTouchStartTime);
 
-        if( touchStartTime2 - lastTouchedEndTime < 500){
+        if( touchStartTime2 - lastTouchStartTime < 500){
             console.log("resizing");
             resized = true;
             originalSize = parseInt(selectedDiv.style.width,10);
@@ -198,7 +198,7 @@ bgDiv.addEventListener("touchstart", e => {
             draggedDiv = null;             
         }
     
-    lastTouchedEndTime = touchStartTime2;
+        lastTouchStartTime = touchStartTime2;
     // if (e.touches.length === 1){
     //     touchStarted = true;
     // }
