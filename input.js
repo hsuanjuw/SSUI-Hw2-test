@@ -156,12 +156,12 @@ bgDiv.addEventListener("touchmove", e => {
         var newDivWidth = Math.abs(e.touches[0].clientX  - e.touches[1].clientX);
         console.log(newDivWidth);
         if (newDivWidth >= 10 ){
-            // if(e.touches[0].clientX < e.touches[1].clientX){
-            //     draggedDiv.style.left= `${e.touches[0].clientX }px`;
-            // }
-            // else{
-            //     draggedDiv.style.left= `${e.touches[1].clientX }px`;
-            // }
+            if(e.touches[0].clientX < e.touches[1].clientX){
+                draggedDiv.style.left= `${e.touches[0].clientX }px`;
+            }
+            else{
+                draggedDiv.style.left= `${e.touches[1].clientX }px`;
+            }
             
             selectedDiv.style.width = newDivWidth.toString() + "px";
         }
@@ -184,8 +184,8 @@ bgDiv.addEventListener("touchstart", e => {
         touch0_y = e.touches[0].clientY;
         touch1_x = e.touches[1].clientX;
         touch1_y = e.touches[1].clientY;
-        console.log(touchStartTime2);
-        console.log(lastTouchStartTime);
+        //console.log(touchStartTime2);
+        //console.log(lastTouchStartTime);
 
         if( touchStartTime2 - lastTouchStartTime < 500 || !touchStarted){
             console.log("resizing");
