@@ -187,7 +187,7 @@ bgDiv.addEventListener("touchstart", e => {
         console.log(touchStartTime2);
         console.log(lastTouchStartTime);
 
-        if( touchStartTime2 - lastTouchStartTime < 1500 || !touchStarted){
+        if( touchStartTime2 - lastTouchStartTime < 500 || !touchStarted){
             console.log("resizing");
             resized = true;
             originalSize = parseInt(selectedDiv.style.width,10);
@@ -201,7 +201,6 @@ bgDiv.addEventListener("touchstart", e => {
             draggedDiv = null;             
         }
     
-        lastTouchStartTime = touchStartTime2;
     // if (e.touches.length === 1){
     //     touchStarted = true;
     // }
@@ -237,6 +236,7 @@ bgDiv.addEventListener("touchstart", e => {
         //     resized = true;
         // }          
     }
+    lastTouchStartTime = touchStartTime2;
 });
 
 bgDiv.addEventListener("touchend", e => {
