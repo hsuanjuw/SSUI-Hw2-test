@@ -15,11 +15,10 @@ let mouse_x, mouse_y;
 
 let mouseMoved;
 let dbclicked = false;
-let lastTouchedTime = 0;
 let lastTouchedEndTime = 0;
 
-
 let touchStartTime, touchEndTime, touchStarted;
+let touchStartTime2, lasttouchStartTime = 0;
 
 let resized = false;
 let touch0_x, touch0_y, touch1_x, touch1_y;
@@ -83,9 +82,7 @@ targetDivs.forEach(target => {
             mouse_y = e.touches[0].clientY;
             draggedOffset_x = mouse_x - draggedDiv.getBoundingClientRect().left;
             draggedOffset_y = mouse_y - draggedDiv.getBoundingClientRect().top; 
-
         }
-        lastTouchedTime = touchTime;
     });
 
     target.addEventListener("touchend", e => {
@@ -158,8 +155,14 @@ bgDiv.addEventListener("touchmove", e => {
         //var newLength = Math.abs(e.touches[0].clientX  - e.touches[1].clientX) - Math.abs(touch0_x - touch1_x);  
         var newDivWidth = Math.abs(e.touches[0].clientX  - e.touches[1].clientX);
         if (newDivWidth >= 10 ){
+            if(e.touches[0].clientX < e.touches[1].clientX){
+                draggedDiv.style.left= `${e.touches[0].clientX }px`;
+            }
+            else{
+                draggedDiv.style.left= `${e.touches[1].clientX }px`;
+            }
+            
             selectedDiv.style.width = newDivWidth.toString() + "px";
-            draggedDiv.style.left= `${draggedDiv.style.left - newDivWidth/2 }px`;
         }
         console.log(selectedDiv.style.width);
         //console.log(newLength);
@@ -171,16 +174,15 @@ bgDiv.addEventListener("touchmove", e => {
 });
 
 bgDiv.addEventListener("touchstart", e => {
-    if (e.touches.length === 1){
-        touchStarted = true;
-    }
-    else if (e.touches.length === 2) {
+    touchStartTime2 = new Date().getTime();
+
+    if (e.touches.length === 2) {
         touch0_x = e.touches[0].clientX;
         touch0_y = e.touches[0].clientY;
         touch1_x = e.touches[1].clientX;
         touch1_y = e.touches[1].clientY;
 
-        if(!touchStarted){
+        if( touchStartTime2 - lastTouchedEndTime < 300){
             console.log("resizing");
             resized = true;
             originalSize = parseInt(selectedDiv.style.width,10);
@@ -193,6 +195,30 @@ bgDiv.addEventListener("touchstart", e => {
             draggedDiv.style.left= `${mouse_x - draggedOffset_x}px`;
             draggedDiv = null;             
         }
+    }
+    lastTouchedEndTime = touchStartTime2;
+    // if (e.touches.length === 1){
+    //     touchStarted = true;
+    // }
+    // else if (e.touches.length === 2) {
+    //     touch0_x = e.touches[0].clientX;
+    //     touch0_y = e.touches[0].clientY;
+    //     touch1_x = e.touches[1].clientX;
+    //     touch1_y = e.touches[1].clientY;
+
+    //     if(!touchStarted){
+    //         console.log("resizing");
+    //         resized = true;
+    //         originalSize = parseInt(selectedDiv.style.width,10);
+    //     }
+    //     else{
+    //         console.log("cancel dragging");
+    //         mouseMoved = false;
+    //         dbclicked = false;
+    //         draggedDiv.style.top =  `${mouse_y - draggedOffset_y}px`;
+    //         draggedDiv.style.left= `${mouse_x - draggedOffset_x}px`;
+    //         draggedDiv = null;             
+    //     }
         // if (touchStartTime - lastTouchedTime > 500) { 
         //     console.log("cancel dragging");
         //     mouseMoved = false;
